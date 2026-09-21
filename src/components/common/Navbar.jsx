@@ -1,177 +1,141 @@
-import React, { useState } from "react";
-import Button from "./Button";
+import React from "react";
 import useScroll from "../../hooks/useScroll";
+import logo from "../../assets/images/CDlogo.png";
+
+const BRAND_NAME = "CreadorDesigns";
+const BRAND_TAGLINE = "Creativity is in our DNA";
 
 export default function Navbar() {
-  const [mobileOpen, setMobileOpen] = useState(false);
   const scrolled = useScroll();
+
+  // Click par hero section pe scroll karo
+  const handleBrandClick = (e) => {
+    e.preventDefault();
+
+    const hero = document.getElementById("home");
+
+    if (hero) {
+      hero.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
 
   return (
     <header
-      className={`fixed left-0 top-0 z-50 w-full px-4 transition-all duration-500 ${
-        scrolled ? "pt-3" : "pt-5"
-      }`}
+      className={`
+        fixed
+        left-0
+        top-0
+        z-50
+        w-full
+        px-3
+        sm:px-4
+        transition-all
+        duration-500
+        ${scrolled ? "pt-3" : "pt-5"}
+      `}
     >
       <div className="mx-auto w-full max-w-[620px]">
-        {/* ================= NAVBAR ================= */}
+        {/* =====================================================
+            TRANSPARENT GLASS NAVBAR
+        ====================================================== */}
+
         <nav
           className={`
-            relative flex h-[66px] items-center justify-between
+            flex
+            min-h-[68px]
+            items-center
+            justify-start
             rounded-[22px]
-            border border-black/[0.07]
-            bg-white/95
+            border
             px-5
+            py-3
             backdrop-blur-xl
-            transition-all duration-500
-            ${
-              scrolled
-                ? "shadow-[0_12px_35px_rgba(0,0,0,0.10)]"
-                : "shadow-[0_4px_20px_rgba(0,0,0,0.04)]"
-            }
-          `}
-        >
-          {/* ================= BRAND ================= */}
-          <a
-            href="#home"
-            className="group flex items-center gap-3"
-            aria-label="Creador Designs"
-          >
-            {/* Premium Logo Mark */}
-            <span className="relative flex h-[36px] w-[36px] items-center justify-center">
-              {/* Outer shape */}
-              <span
-                className="
-                  absolute
-                  left-[7px]
-                  top-[3px]
-                  h-[29px]
-                  w-[22px]
-                  rounded-[4px]
-                  border-[3px]
-                  border-black
-                  transition-transform
-                  duration-300
-                  group-hover:scale-[1.04]
-                "
-              />
-
-              {/* Inner shape */}
-              <span
-                className="
-                  absolute
-                  left-[12px]
-                  top-[9px]
-                  h-[17px]
-                  w-[11px]
-                  rounded-[2px]
-                  border-l-[3px]
-                  border-b-[3px]
-                  border-black
-                  bg-white
-                "
-              />
-            </span>
-
-            {/* Brand */}
-            <span
-              className="
-                whitespace-nowrap
-                text-[13px]
-                font-bold
-                uppercase
-                tracking-[0.04em]
-                text-black
-              "
-            >
-              Creador Designs
-            </span>
-          </a>
-
-          {/* ================= DESKTOP CTA ================= */}
-          <div className="hidden sm:block">
-            <Button href="#contact">Get Started</Button>
-          </div>
-
-          {/* ================= MOBILE MENU BUTTON ================= */}
-          <button
-            type="button"
-            onClick={() => setMobileOpen((prev) => !prev)}
-            className="
-              flex
-              h-[40px]
-              w-[40px]
-              items-center
-              justify-center
-              rounded-full
-              bg-black
-              text-white
-              transition-all
-              duration-300
-              hover:scale-105
-              active:scale-95
-              sm:hidden
-            "
-            aria-label="Toggle menu"
-            aria-expanded={mobileOpen}
-          >
-            <span
-              className={`text-[19px] leading-none transition-transform duration-300 ${
-                mobileOpen ? "rotate-90" : ""
-              }`}
-            >
-              {mobileOpen ? "×" : "☰"}
-            </span>
-          </button>
-        </nav>
-
-        {/* ================= MOBILE MENU ================= */}
-        <div
-          className={`
-            overflow-hidden
             transition-all
             duration-500
-            sm:hidden
+
+            sm:min-h-[76px]
+            sm:rounded-[26px]
+            sm:px-7
+
             ${
-              mobileOpen
-                ? "mt-2 max-h-[180px] opacity-100"
-                : "max-h-0 opacity-0"
+              scrolled
+                ? "border-black/[0.08] bg-white/55 shadow-[0_18px_50px_rgba(0,0,0,0.10)] backdrop-blur-2xl"
+                : "border-black/[0.06] bg-white/25 shadow-[0_4px_24px_rgba(0,0,0,0.03)]"
             }
           `}
         >
-          <div
-            className="
-              rounded-[22px]
-              border
-              border-black/[0.07]
-              bg-white/95
-              p-2
-              shadow-[0_15px_40px_rgba(0,0,0,0.10)]
-              backdrop-blur-xl
-            "
+          {/* =================================================
+              BRAND (LOGO + NAME, CLICK → HERO)
+          ================================================== */}
+<a
+          
+            href="#home"
+            onClick={handleBrandClick}
+            aria-label={BRAND_NAME}
+            className="group flex items-center gap-3 text-left sm:gap-4"
           >
-            <a
-              href="#contact"
-              onClick={() => setMobileOpen(false)}
+            {/* Logo */}
+            <img
+              src={logo}
+              alt={`${BRAND_NAME} logo`}
               className="
-                block
-                rounded-[16px]
-                bg-black
-                px-5
-                py-3.5
-                text-center
-                text-[13px]
-                font-semibold
-                text-white
-                transition-all
-                duration-300
-                hover:bg-black/90
+                h-[38px]
+                w-auto
+                shrink-0
+                object-contain
+                transition-transform
+                duration-500
+                group-hover:scale-105
+
+                sm:h-[44px]
               "
-            >
-              Get Started
-              <span className="ml-1.5">↗</span>
-            </a>
-          </div>
-        </div>
+            />
+
+            {/* Name + Tagline */}
+            <span className="flex flex-col items-start justify-center">
+              {/* Company Name */}
+              <span
+                className="
+                  whitespace-nowrap
+                  text-[22px]
+                  font-extrabold
+                  leading-none
+                  tracking-[-0.03em]
+                  text-black
+                  transition-all
+                  duration-300
+
+                  sm:text-[26px]
+                "
+              >
+                {BRAND_NAME}
+              </span>
+
+              {/* Tagline */}
+              <span
+                className="
+                  mt-[7px]
+                  whitespace-nowrap
+                  text-[7px]
+                  font-semibold
+                  uppercase
+                  leading-none
+                  tracking-[0.24em]
+                  text-black/60
+                  transition-colors
+                  duration-300
+                  group-hover:text-black
+
+                  sm:text-[8px]
+                "
+              >
+                {BRAND_TAGLINE}
+              </span>
+            </span>
+          </a>
+        </nav>
       </div>
     </header>
   );

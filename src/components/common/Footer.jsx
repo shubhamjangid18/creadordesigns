@@ -1,7 +1,15 @@
 import React, { useState } from "react";
+import logo from "../../assets/images/CDlogo.png";
+
+const BRAND_NAME = "CreadorDesigns";
+const BRAND_TAGLINE = "Creativity is in our DNA";
 
 const INSTAGRAM_URL = "#"; // apna Instagram link yahan daalo
 const WHATSAPP_URL = "#"; // e.g. https://wa.me/91XXXXXXXXXX
+
+// Agar logo dark/black hai aur black footer pe nahi dikh raha,
+// to isko true kar do. Logo white ho jaayega.
+const INVERT_LOGO = false;
 
 function InstagramIcon() {
   return (
@@ -87,12 +95,33 @@ export default function Footer() {
   return (
     <footer id="contact" className="rounded-t-[28px] bg-black text-white">
       <div className="container-main pt-16">
-        {/* Top: heading + form */}
+        {/* Top: heading + brand + form */}
         <div className="grid gap-12 pb-14 md:grid-cols-[2fr_1fr] md:gap-0">
-          <div className="md:pr-10">
+          <div className="flex flex-col justify-between gap-12 md:pr-10">
             <h2 className="max-w-md text-4xl font-medium leading-[1.12] tracking-tight md:text-[52px]">
               Have a project in mind? We’re ready.
             </h2>
+
+            {/* Brand: logo + name + tagline */}
+            <div className="flex items-center gap-4 sm:gap-5">
+              <img
+                src={logo}
+                alt={`${BRAND_NAME} logo`}
+                className={`h-[72px] w-auto shrink-0 object-contain sm:h-[88px] ${
+                  INVERT_LOGO ? "brightness-0 invert" : ""
+                }`}
+              />
+
+              <div className="flex flex-col items-start justify-center">
+                <span className="whitespace-nowrap text-[22px] font-extrabold leading-none tracking-[-0.03em] text-white sm:text-[26px]">
+                  {BRAND_NAME}
+                </span>
+
+                <span className="mt-[7px] whitespace-nowrap text-[7px] font-semibold uppercase leading-none tracking-[0.24em] text-white/55 sm:text-[8px]">
+                  {BRAND_TAGLINE}
+                </span>
+              </div>
+            </div>
           </div>
 
           <form
@@ -146,8 +175,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="flex flex-col items-start justify-between gap-6 border-t border-white/15 py-8 sm:flex-row sm:items-center">
           <p className="text-base font-light text-white/60">
-            © {new Date().getFullYear()} MyD Company Profile. All Rights
-            Reserved.
+            © {new Date().getFullYear()} {BRAND_NAME}. All Rights Reserved.
           </p>
 
           <div className="flex items-center gap-3">

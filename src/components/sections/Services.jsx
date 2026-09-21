@@ -28,6 +28,12 @@ const projects = [
   },
 ];
 
+// External link (http...) ho to naye tab me khule, warna same tab me
+const getLinkProps = (link) =>
+  /^https?:\/\//.test(link)
+    ? { target: "_blank", rel: "noopener noreferrer" }
+    : {};
+
 export default function ServicesPremium() {
   return (
     <section
@@ -109,101 +115,117 @@ export default function ServicesPremium() {
               className="group"
             >
               {/* =================================================
-                  IMAGE CARD
+                  IMAGE CARD (CLICKABLE)
               ================================================== */}
 
-              <motion.div
-                whileHover={{
-                  y: -5,
-                }}
-                transition={{
-                  duration: 0.45,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
+              <a
+                href={project.link}
+                aria-label={`Open ${project.title}`}
+                {...getLinkProps(project.link)}
                 className="
-                  relative
-                  aspect-[1.48/1]
-                  overflow-hidden
+                  block
+                  cursor-pointer
                   rounded-[1.5rem]
-                  border
-                  border-black/[0.055]
-                  bg-white
-                  shadow-[0_8px_35px_rgba(0,0,0,0.045)]
-                  transition-all
-                  duration-500
-                  group-hover:shadow-[0_20px_55px_rgba(0,0,0,0.10)]
+                  outline-none
+                  focus-visible:ring-2
+                  focus-visible:ring-black/40
+                  focus-visible:ring-offset-2
                   sm:rounded-[1.7rem]
                 "
               >
-                {/* Image */}
-                <motion.img
-                  src={project.image}
-                  alt={project.title}
-                  loading="lazy"
+                <motion.div
                   whileHover={{
-                    scale: 1.045,
+                    y: -5,
                   }}
                   transition={{
-                    duration: 0.8,
+                    duration: 0.45,
                     ease: [0.22, 1, 0.36, 1],
                   }}
                   className="
-                    absolute
-                    inset-0
-                    h-full
-                    w-full
-                    object-cover
-                  "
-                />
-
-                {/* Soft white overlay */}
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    inset-0
-                    bg-gradient-to-t
-                    from-black/[0.04]
-                    via-transparent
-                    to-white/[0.06]
-                    opacity-60
-                  "
-                />
-
-                {/* Premium border highlight */}
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    inset-[1px]
-                    rounded-[1.45rem]
+                    relative
+                    aspect-[1.48/1]
+                    overflow-hidden
+                    rounded-[1.5rem]
                     border
-                    border-white/40
-                    opacity-70
-                    sm:rounded-[1.6rem]
+                    border-black/[0.055]
+                    bg-white
+                    shadow-[0_8px_35px_rgba(0,0,0,0.045)]
+                    transition-all
+                    duration-500
+                    group-hover:shadow-[0_20px_55px_rgba(0,0,0,0.10)]
+                    sm:rounded-[1.7rem]
                   "
-                />
+                >
+                  {/* Image */}
+                  <motion.img
+                    src={project.image}
+                    alt={project.title}
+                    loading="lazy"
+                    whileHover={{
+                      scale: 1.045,
+                    }}
+                    transition={{
+                      duration: 0.8,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className="
+                      absolute
+                      inset-0
+                      h-full
+                      w-full
+                      object-cover
+                    "
+                  />
 
-                {/* Hover glow */}
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    -bottom-20
-                    left-1/2
-                    h-40
-                    w-[70%]
-                    -translate-x-1/2
-                    rounded-full
-                    bg-white/20
-                    opacity-0
-                    blur-3xl
-                    transition-opacity
-                    duration-700
-                    group-hover:opacity-100
-                  "
-                />
-              </motion.div>
+                  {/* Soft white overlay */}
+                  <div
+                    className="
+                      pointer-events-none
+                      absolute
+                      inset-0
+                      bg-gradient-to-t
+                      from-black/[0.04]
+                      via-transparent
+                      to-white/[0.06]
+                      opacity-60
+                    "
+                  />
+
+                  {/* Premium border highlight */}
+                  <div
+                    className="
+                      pointer-events-none
+                      absolute
+                      inset-[1px]
+                      rounded-[1.45rem]
+                      border
+                      border-white/40
+                      opacity-70
+                      sm:rounded-[1.6rem]
+                    "
+                  />
+
+                  {/* Hover glow */}
+                  <div
+                    className="
+                      pointer-events-none
+                      absolute
+                      -bottom-20
+                      left-1/2
+                      h-40
+                      w-[70%]
+                      -translate-x-1/2
+                      rounded-full
+                      bg-white/20
+                      opacity-0
+                      blur-3xl
+                      transition-opacity
+                      duration-700
+                      group-hover:opacity-100
+                    "
+                  />
+                </motion.div>
+              </a>
 
               {/* =================================================
                   PROJECT INFO
@@ -242,6 +264,7 @@ export default function ServicesPremium() {
                 {/* Visit button */}
                 <motion.a
                   href={project.link}
+                  {...getLinkProps(project.link)}
                   whileHover={{
                     scale: 1.04,
                     y: -1,
