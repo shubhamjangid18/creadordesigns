@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import instagramPage from "../../assets/images/instagrampage.jpg";
 
 /* -------------------------------------------------------
    SETTINGS — yahan se easily change kar sakte ho
 -------------------------------------------------------- */
-const BRAND_LABEL = "MyD Bucket";
+const BRAND_LABEL = "CreadorDesigns";
 const INSTAGRAM_URL = "https://www.instagram.com/";
 const INSTAGRAM_HANDLE = "myd_bucket";
 
-// Real Instagram screenshot lagana ho to image "public" folder me rakho
-// aur yahan path daalo, e.g. "/instagram-screen.png".
-// Khali chhodoge to neeche wala bana hua phone mockup dikhega.
-const INSTAGRAM_SCREENSHOT = "";
+// "Launch In Days" wale card ke upar wale bar ka colour
+const BRAND_BAR_COLOR = "#14532d"; // dark green
+
+// Instagram page ki image (src/assets/images/instagrampage.jpg)
+const INSTAGRAM_SCREENSHOT = instagramPage;
+
+// Agar aapki image me already phone ka frame bana hua hai
+// (mockup wali image), to isko true kar do. Tab hamara frame nahi lagega.
+const SCREENSHOT_HAS_FRAME = false;
 
 const steps = [
   { day: "Day 1", text: "Collecting logo file and content information." },
@@ -133,6 +139,25 @@ function BrandMark() {
   );
 }
 
+function InstagramGlyph({ className = "h-7 w-7" }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
+    </svg>
+  );
+}
+
 function UaeFlag() {
   return (
     <svg
@@ -205,129 +230,88 @@ function LanguagePill() {
 }
 
 /* -------------------------------------------------------
-   INSTAGRAM PHONE MOCKUP
+   INSTAGRAM PHONE (FULL SCREENSHOT, FITS THE CARD HEIGHT)
 -------------------------------------------------------- */
 
-function FakeInstagramScreen() {
-  const highlights = ["Team", "Videography", "Reviews", "Co.Profile", "Brand"];
-  const tiles = [
-    { text: "Website Project", className: "bg-[#2f4ea8] text-white" },
-    { text: "Company Profile Design", className: "bg-[#e9e9ee] text-black" },
-    { text: "Our Biggest Branding Project", className: "bg-[#d84a3a] text-white" },
-  ];
-
+// Image load na ho to ye clean screen dikhegi
+function PlaceholderScreen() {
   return (
-    <div className="pt-2 text-white">
-      {/* Status bar */}
-      <div className="flex items-center justify-between px-5 text-[8px] font-medium">
-        <span>6:17</span>
-        <span>77%</span>
-      </div>
+    <div className="flex h-full w-full flex-col items-center justify-center gap-4 bg-gradient-to-b from-[#0d0d10] to-black text-white">
+      <span className="flex h-16 w-16 items-center justify-center rounded-[20px] bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] shadow-[0_10px_30px_rgba(238,42,123,0.35)]">
+        <InstagramGlyph className="h-8 w-8 text-white" />
+      </span>
 
-      {/* Header */}
-      <div className="mt-5 flex items-center gap-2 px-3 text-[10px] font-semibold">
-        <span>←</span>
-        <span>{INSTAGRAM_HANDLE}</span>
-        <span className="flex h-[10px] w-[10px] items-center justify-center rounded-full bg-[#3897f0] text-[6px]">
-          ✓
-        </span>
-        <span className="ml-auto text-white/70">⋮</span>
-      </div>
-
-      {/* Profile */}
-      <div className="mt-3 flex items-center gap-3 px-3">
-        <span className="flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] p-[2px]">
-          <span className="flex h-full w-full items-center justify-center rounded-full bg-black">
-            <span className="text-[13px] font-bold">M</span>
-          </span>
-        </span>
-
-        <div className="min-w-0">
-          <p className="truncate text-[8px] font-semibold">
-            Creative agency in Dubai
-          </p>
-
-          <div className="mt-1.5 flex gap-3 text-center">
-            {[
-              ["1,062", "posts"],
-              ["31.2K", "followers"],
-              ["9", "following"],
-            ].map(([num, label]) => (
-              <div key={label}>
-                <p className="text-[9px] font-semibold leading-none">{num}</p>
-                <p className="mt-0.5 text-[6.5px] text-white/60">{label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Bio */}
-      <p className="mt-2 px-3 text-[7.5px] leading-[1.35] text-white/85">
-        Branding → Company profile → Website → Video production
-        <br />
-        400+ clients all over GCC · Fast work delivery
-      </p>
-
-      {/* Buttons */}
-      <div className="mt-3 flex gap-1.5 px-3 text-center text-[8px] font-medium">
-        <span className="flex-[1.2] rounded-md bg-[#4c5fff] py-1.5">Follow</span>
-        <span className="flex-[1.2] rounded-md bg-white/15 py-1.5">Message</span>
-        <span className="flex-[1.2] rounded-md bg-white/15 py-1.5">Contact</span>
-        <span className="w-6 rounded-md bg-white/15 py-1.5">⌄</span>
-      </div>
-
-      {/* Highlights */}
-      <div className="mt-3 flex gap-2.5 overflow-hidden px-3">
-        {highlights.map((item) => (
-          <div key={item} className="flex w-[34px] shrink-0 flex-col items-center">
-            <span className="h-[32px] w-[32px] rounded-full border border-white/30 bg-gradient-to-br from-white/25 to-white/5" />
-            <span className="mt-1 w-full truncate text-center text-[6px] text-white/70">
-              {item}
-            </span>
-          </div>
-        ))}
-      </div>
-
-      {/* Tabs */}
-      <div className="mt-3 flex justify-around border-t border-white/10 py-1.5 text-[9px] text-white/70">
-        <span>▦</span>
-        <span>▶</span>
-        <span>⟳</span>
-        <span>☺</span>
-      </div>
-
-      {/* Grid */}
-      <div className="grid grid-cols-3 gap-[1px]">
-        {tiles.map((tile) => (
-          <div
-            key={tile.text}
-            className={`flex h-[120px] items-end p-1.5 text-[8px] font-bold leading-tight ${tile.className}`}
-          >
-            {tile.text}
-          </div>
-        ))}
-      </div>
+      <span className="text-sm font-medium tracking-tight text-white/90">
+        @{INSTAGRAM_HANDLE}
+      </span>
     </div>
   );
 }
 
-function Phone() {
+function InstagramPhone() {
+  const [failed, setFailed] = useState(false);
+
+  // Image ka asli ratio (width / height). Load hone ke baad update hota hai,
+  // isse phone image ke shape ke hisaab se banta hai aur kuch crop nahi hota.
+  const [ratio, setRatio] = useState(9 / 19.5);
+
+  const hasImage = Boolean(INSTAGRAM_SCREENSHOT) && !failed;
+  const alt = `${INSTAGRAM_HANDLE} Instagram page`;
+
+  const handleLoad = (e) => {
+    const { naturalWidth, naturalHeight } = e.currentTarget;
+    if (naturalWidth && naturalHeight) {
+      setRatio(naturalWidth / naturalHeight);
+    }
+  };
+
+  // Image me already phone frame hai -> sirf image dikhao
+  if (hasImage && SCREENSHOT_HAS_FRAME) {
+    return (
+      <div
+        style={{ aspectRatio: ratio }}
+        className="h-full max-w-full drop-shadow-[0_30px_50px_rgba(0,0,0,0.30)]"
+      >
+        <img
+          src={INSTAGRAM_SCREENSHOT}
+          alt={alt}
+          draggable={false}
+          onLoad={handleLoad}
+          onError={() => setFailed(true)}
+          className="h-full w-full object-contain"
+        />
+      </div>
+    );
+  }
+
   return (
-    <div className="relative mx-auto mt-20 w-[250px] rounded-[40px] bg-gradient-to-b from-[#c8741f] to-[#8a4510] p-[5px] shadow-[0_25px_60px_rgba(0,0,0,0.35)]">
-      <div className="relative h-[540px] overflow-hidden rounded-[35px] bg-black">
-        {INSTAGRAM_SCREENSHOT ? (
+    <div
+      style={{ aspectRatio: ratio }}
+      className="relative h-full max-w-full rounded-[44px] bg-gradient-to-b from-[#4a4a50] via-[#1b1b1e] to-[#0a0a0b] p-[6px] shadow-[0_40px_70px_-25px_rgba(0,0,0,0.55),0_0_0_1px_rgba(0,0,0,0.6)] ring-1 ring-white/10"
+    >
+      {/* Side buttons */}
+      <span className="absolute -left-[3px] top-[14%] h-[4.5%] w-[3px] rounded-l bg-[#2a2a2e]" />
+      <span className="absolute -left-[3px] top-[21%] h-[8%] w-[3px] rounded-l bg-[#2a2a2e]" />
+      <span className="absolute -left-[3px] top-[31%] h-[8%] w-[3px] rounded-l bg-[#2a2a2e]" />
+      <span className="absolute -right-[3px] top-[25%] h-[11%] w-[3px] rounded-r bg-[#2a2a2e]" />
+
+      {/* Screen */}
+      <div className="relative h-full w-full overflow-hidden rounded-[38px] bg-black ring-1 ring-black">
+        {hasImage ? (
           <img
             src={INSTAGRAM_SCREENSHOT}
-            alt="Instagram page preview"
-            className="h-full w-full object-cover object-top"
+            alt={alt}
+            draggable={false}
+            onLoad={handleLoad}
+            onError={() => setFailed(true)}
+            className="block h-full w-full object-cover object-top"
           />
         ) : (
-          <FakeInstagramScreen />
+          <PlaceholderScreen />
         )}
 
-        {/* Notch */}
-        <span className="absolute left-1/2 top-2 h-[14px] w-[70px] -translate-x-1/2 rounded-full border border-white/10 bg-[#111]" />
+        {/* Soft glass reflection */}
+        <span className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.08] via-transparent to-transparent" />
       </div>
     </div>
   );
@@ -370,8 +354,8 @@ export default function Process() {
                 whileInView={{ scaleX: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-                style={{ originX: 0 }}
-                className="mt-4 h-[14px] w-full rounded-full bg-[#e63946]"
+                style={{ originX: 0, backgroundColor: BRAND_BAR_COLOR }}
+                className="mt-4 h-[14px] w-full rounded-full"
               />
 
               <p className="mt-3 text-lg">3 – 6 Days</p>
@@ -401,22 +385,29 @@ export default function Process() {
             </motion.div>
           </div>
 
-          {/* RIGHT COLUMN: INSTAGRAM */}
+          {/* RIGHT COLUMN: INSTAGRAM SCREENSHOT */}
           <motion.div
             {...reveal}
-            className={`${cardClass} min-h-[560px] overflow-hidden px-6 pt-10 lg:min-h-0`}
+            className={`${cardClass} relative h-[600px] overflow-hidden lg:h-auto lg:min-h-[560px]`}
           >
-            <a
+            {/* Soft premium tint */}
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(238,42,123,0.06),transparent_60%)]" />
+
+            {/* Glow behind phone */}
+            <div className="pointer-events-none absolute left-1/2 top-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#ee2a7b]/15 blur-[90px]" />
+
+            {/* Phone (click -> Instagram) */}
+            <motion.a
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 text-[22px] font-normal tracking-tight transition-opacity hover:opacity-70"
+              aria-label={`Open ${INSTAGRAM_HANDLE} on Instagram`}
+              whileHover={{ scale: 1.015 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute inset-5 z-10 flex items-center justify-center sm:inset-6"
             >
-              Our Instagram Page
-              <span className="text-xl">↪</span>
-            </a>
-
-            <Phone />
+              <InstagramPhone />
+            </motion.a>
           </motion.div>
         </div>
 
