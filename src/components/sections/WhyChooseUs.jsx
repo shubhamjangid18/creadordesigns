@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function WhatWeDeliver() {
   const deliverables = [
-    "Custom-Designed Brand Identities & Logo Systems",
+    "Growing business profile",
     "Pixel-Perfect Website Design & Full-Stack Development",
     "Responsive Web Templates & UI/UX Components",
     "Enterprise-Grade Web Applications & Solutions",
@@ -44,7 +44,7 @@ export default function WhatWeDeliver() {
       ),
     },
     {
-      title: "Visually Custom Designed",
+      title: "Impactfull designs",
       icon: (
         <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect x="9" y="14" width="46" height="31" rx="2" stroke="currentColor" strokeWidth="2.5" />
@@ -117,10 +117,10 @@ export default function WhatWeDeliver() {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="mb-6 inline-flex items-center gap-2"
+            className="mb-6 inline-flex items-center gap-2.5"
           >
-            <span className="h-[6px] w-[6px] rounded-full bg-[#7a7a7a]" />
-            <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-black/40">
+            <span className="h-[8px] w-[8px] rounded-full bg-[#7a7a7a]" />
+            <span className="text-[15px] sm:text-[16px] font-semibold uppercase tracking-[0.22em] text-black/40">
               Our Expertise
             </span>
           </motion.div>
@@ -177,7 +177,7 @@ export default function WhatWeDeliver() {
                     }}
                     viewport={{ once: true }}
                     whileHover={{ scale: 1.15 }}
-                    className="mt-1 flex h-7 w-7 sm:h-8 sm:w-8 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#8a8a8a] to-[#6b6b6b] text-white shadow-[0_4px_15px_rgba(0,0,0,0.18)] group-hover:shadow-[0_8px_25px_rgba(0,0,0,0.28)] transition-all duration-300"
+                    className="mt-1 flex h-7 w-7 sm:h-8 sm:w-8 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#1a6b3f] to-[#0b3d24] text-white shadow-[0_4px_15px_rgba(19,90,54,0.25)] group-hover:shadow-[0_8px_25px_rgba(19,90,54,0.4)] transition-all duration-300"
                   >
                     <motion.span
                       initial={{ scale: 0 }}
@@ -208,7 +208,7 @@ export default function WhatWeDeliver() {
             whileInView={{ scaleX: 1 }}
             transition={{ delay: 0.8, duration: 0.8 }}
             viewport={{ once: true }}
-            className="absolute bottom-0 left-0 right-0 h-1 origin-left bg-gradient-to-r from-[#7a7a7a] to-transparent"
+            className="absolute bottom-0 left-0 right-0 h-1 origin-left bg-gradient-to-r from-[#1a6b3f] to-transparent"
           />
         </motion.div>
 

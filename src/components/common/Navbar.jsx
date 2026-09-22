@@ -2,7 +2,7 @@ import React from "react";
 import useScroll from "../../hooks/useScroll";
 import logo from "../../assets/images/CDlogo.png";
 
-const BRAND_NAME = "CreadorDesigns";
+const BRAND_NAME = "Creador Designs";
 const BRAND_TAGLINE = "Creativity is in our DNA";
 
 export default function Navbar() {
@@ -36,7 +36,7 @@ export default function Navbar() {
         ${scrolled ? "pt-3" : "pt-5"}
       `}
     >
-      <div className="mx-auto w-full max-w-[620px]">
+      <div className="mx-auto w-full max-w-[480px]">
         {/* =====================================================
             TRANSPARENT GLASS NAVBAR
         ====================================================== */}
@@ -44,20 +44,20 @@ export default function Navbar() {
         <nav
           className={`
             flex
-            min-h-[68px]
+            min-h-[76px]
             items-center
-            justify-start
-            rounded-[22px]
+            justify-center
+            rounded-[18px]
             border
-            px-5
-            py-3
+            px-4
+            py-2
             backdrop-blur-xl
             transition-all
             duration-500
 
-            sm:min-h-[76px]
-            sm:rounded-[26px]
-            sm:px-7
+            sm:min-h-[84px]
+            sm:rounded-[22px]
+            sm:px-5
 
             ${
               scrolled
@@ -69,19 +69,18 @@ export default function Navbar() {
           {/* =================================================
               BRAND (LOGO + NAME, CLICK → HERO)
           ================================================== */}
-<a
-          
+          <a
             href="#home"
             onClick={handleBrandClick}
             aria-label={BRAND_NAME}
-            className="group flex items-center gap-3 text-left sm:gap-4"
+            className="group flex items-center gap-1.5 text-center sm:gap-2"
           >
             {/* Logo */}
             <img
               src={logo}
               alt={`${BRAND_NAME} logo`}
               className="
-                h-[38px]
+                h-[34px]
                 w-auto
                 shrink-0
                 object-contain
@@ -89,17 +88,17 @@ export default function Navbar() {
                 duration-500
                 group-hover:scale-105
 
-                sm:h-[44px]
+                sm:h-[38px]
               "
             />
 
             {/* Name + Tagline */}
-            <span className="flex flex-col items-start justify-center">
+            <span className="flex flex-col items-center justify-center">
               {/* Company Name */}
               <span
                 className="
                   whitespace-nowrap
-                  text-[22px]
+                  text-[20px]
                   font-extrabold
                   leading-none
                   tracking-[-0.03em]
@@ -107,7 +106,7 @@ export default function Navbar() {
                   transition-all
                   duration-300
 
-                  sm:text-[26px]
+                  sm:text-[23px]
                 "
               >
                 {BRAND_NAME}
@@ -116,7 +115,7 @@ export default function Navbar() {
               {/* Tagline */}
               <span
                 className="
-                  mt-[7px]
+                  mt-[6px]
                   whitespace-nowrap
                   text-[7px]
                   font-semibold

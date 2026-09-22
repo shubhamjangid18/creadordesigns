@@ -49,15 +49,24 @@ export default function Hero() {
         "
       />
 
-      {/* Subtle grid */}
+      {/* Grid */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.025]"
+        className="pointer-events-none absolute inset-0 opacity-[0.09]"
         style={{
           backgroundImage: `
             linear-gradient(to right, #000 1px, transparent 1px),
             linear-gradient(to bottom, #000 1px, transparent 1px)
           `,
           backgroundSize: "70px 70px",
+        }}
+      />
+
+      {/* Grid fade mask so it stays soft at the edges */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, transparent 0%, transparent 35%, #fafafa 85%)",
         }}
       />
 
@@ -160,7 +169,7 @@ export default function Hero() {
         >
           Delivered in{" "}
           <span className="font-normal">
-            3–6 Days.
+            4–6 Days.
           </span>
         </motion.h2>
 
@@ -193,7 +202,7 @@ export default function Hero() {
             md:text-[17px]
           "
         >
-          Built for investors, partners, and serious business growth
+          Built for growing business, and serious business owner
           <br className="hidden sm:block" />
           without unnecessary delays.
         </motion.p>
@@ -257,18 +266,18 @@ export default function Hero() {
               border-black/20
               bg-gradient-to-r
               from-black
-              via-[#8f0000]
-              to-[#e00000]
+              via-[#0b3d24]
+              to-[#1a6b3f]
               px-8
               py-[14px]
               text-[13px]
               font-semibold
               tracking-[-0.01em]
               text-white
-              shadow-[0_10px_30px_rgba(180,0,0,0.22)]
+              shadow-[0_10px_30px_rgba(19,90,54,0.25)]
               transition-shadow
               duration-500
-              hover:shadow-[0_15px_40px_rgba(180,0,0,0.34)]
+              hover:shadow-[0_15px_40px_rgba(19,90,54,0.38)]
             "
           >
             {/* Moving shine */}
@@ -472,56 +481,6 @@ export default function Hero() {
           bg-gradient-to-t
           from-[#fafafa]
           to-transparent
-        "
-      />
-
-      {/* =====================================================
-          FLOATING SIDE ELEMENTS
-      ====================================================== */}
-
-      <motion.div
-        animate={{
-          y: [0, -10, 0],
-        }}
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="
-          pointer-events-none
-          absolute
-          left-[6%]
-          top-[42%]
-          hidden
-          h-2
-          w-2
-          rounded-full
-          bg-[#e00000]/40
-          lg:block
-        "
-      />
-
-      <motion.div
-        animate={{
-          y: [0, 10, 0],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="
-          pointer-events-none
-          absolute
-          right-[8%]
-          top-[32%]
-          hidden
-          h-1.5
-          w-1.5
-          rounded-full
-          bg-black/20
-          lg:block
         "
       />
     </section>

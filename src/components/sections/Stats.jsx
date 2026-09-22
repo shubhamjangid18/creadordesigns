@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function PremiumMarqueeOnly() {
   const marqueeContent = [
-    "Delivery in 3-6 business days",
+    "Delivery in 4-6 business days",
     "100% custom design (no templates)",
     "Strategic content",
     "Creador Designs",

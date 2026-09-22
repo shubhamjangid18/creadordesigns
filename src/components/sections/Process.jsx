@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import instagramPage from "../../assets/images/instagrampage.jpg";
+import creadorLogo from "../../assets/images/CDlogo.png";
 
 /* -------------------------------------------------------
    SETTINGS — yahan se easily change kar sakte ho
 -------------------------------------------------------- */
-const BRAND_LABEL = "CreadorDesigns";
+const BRAND_LABEL = "Creador Designs";
 const INSTAGRAM_URL = "https://www.instagram.com/";
 const INSTAGRAM_HANDLE = "myd_bucket";
 
-// "Launch In Days" wale card ke upar wale bar ka colour
-const BRAND_BAR_COLOR = "#14532d"; // dark green
 
+const BRAND_BAR_COLOR = "#1a6b3f"; 
 // Instagram page ki image (src/assets/images/instagrampage.jpg)
 const INSTAGRAM_SCREENSHOT = instagramPage;
 
@@ -121,21 +121,11 @@ function PillIcon({ type }) {
 
 function BrandMark() {
   return (
-    <span className="flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-[7px] bg-gradient-to-br from-[#0a1a4a] to-[#1533a8]">
-      <svg
-        viewBox="0 0 24 24"
-        className="h-4 w-4 text-white"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M5 21V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v15" />
-        <path d="M9.5 21v-8a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v8" />
-      </svg>
-    </span>
+    <img
+      src={creadorLogo}
+      alt={`${BRAND_LABEL} logo`}
+      className="h-[30px] w-[30px] shrink-0 object-contain"
+    />
   );
 }
 
@@ -158,44 +148,54 @@ function InstagramGlyph({ className = "h-7 w-7" }) {
   );
 }
 
-function UaeFlag() {
+/* -------------------------------------------------------
+   ICONS FOR "PRINT" / "DIGITAL" PILL
+-------------------------------------------------------- */
+
+function PrintIcon() {
   return (
     <svg
-      viewBox="0 0 48 48"
-      preserveAspectRatio="xMidYMid slice"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className="h-full w-full"
       aria-hidden="true"
     >
-      <rect width="48" height="16" fill="#00732f" />
-      <rect y="16" width="48" height="16" fill="#fff" />
-      <rect y="32" width="48" height="16" fill="#000" />
-      <rect width="14" height="48" fill="#ff0000" />
+      <path d="M6 9V3h12v6" />
+      <rect x="4" y="9" width="16" height="8" rx="2" />
+      <path d="M6 17v4h12v-4" />
+      <path d="M8 13h8" />
     </svg>
   );
 }
 
-function UkFlag() {
+function DigitalIcon() {
   return (
     <svg
-      viewBox="0 0 60 60"
-      preserveAspectRatio="xMidYMid slice"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className="h-full w-full"
       aria-hidden="true"
     >
-      <rect width="60" height="60" fill="#012169" />
-      <path d="M0 0 60 60M60 0 0 60" stroke="#fff" strokeWidth="10" />
-      <path d="M0 0 60 60M60 0 0 60" stroke="#C8102E" strokeWidth="4" />
-      <path d="M30 0v60M0 30h60" stroke="#fff" strokeWidth="16" />
-      <path d="M30 0v60M0 30h60" stroke="#C8102E" strokeWidth="9" />
+      <rect x="3" y="4" width="18" height="12" rx="2" />
+      <path d="M8 21h8" />
+      <path d="M12 16v5" />
     </svg>
   );
 }
 
 /* -------------------------------------------------------
-   LANGUAGE PILL (Arabic <-> English auto switch)
+   TYPE PILL (Print <-> Digital auto switch)
 -------------------------------------------------------- */
 
-function LanguagePill() {
+function TypePill() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -203,12 +203,12 @@ function LanguagePill() {
     return () => clearInterval(timer);
   }, []);
 
-  const languages = [
-    { label: "عربي", flag: <UaeFlag /> },
-    { label: "English", flag: <UkFlag /> },
+  const types = [
+    { label: "Print", icon: <PrintIcon /> },
+    { label: "Digital", icon: <DigitalIcon /> },
   ];
 
-  const current = languages[index];
+  const current = types[index];
 
   return (
     <div className="flex h-[68px] min-w-[178px] items-center justify-center rounded-full bg-white px-6 shadow-[0_4px_18px_rgba(0,0,0,0.05)]">
@@ -221,8 +221,8 @@ function LanguagePill() {
       >
         <span className="text-lg">{current.label}</span>
 
-        <span className="block h-[38px] w-[38px] overflow-hidden rounded-full">
-          {current.flag}
+        <span className="flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#1a6b3f] to-[#0b3d24] p-[9px] text-white shadow-[0_4px_14px_rgba(19,90,54,0.3)]">
+          {current.icon}
         </span>
       </motion.div>
     </div>
@@ -318,6 +318,102 @@ function InstagramPhone() {
 }
 
 /* -------------------------------------------------------
+   6-DAY PROCESS — premium animated step block
+-------------------------------------------------------- */
+
+function ProcessStep({ step, index }) {
+  return (
+    <motion.div
+      variants={{
+        hidden: { opacity: 0, y: 26 },
+        visible: {
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
+        },
+      }}
+      whileHover="hover"
+      className="group relative text-center"
+    >
+      {/* Soft glow that blooms behind the number on hover */}
+      <motion.span
+        variants={{
+          hover: { opacity: 1, scale: 1 },
+        }}
+        initial={{ opacity: 0, scale: 0.7 }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        className="pointer-events-none absolute left-1/2 top-2 h-16 w-28 -translate-x-1/2 rounded-full bg-[#1a6b3f]/[0.07] blur-2xl"
+      />
+
+      {/* Day number */}
+      <motion.h3
+        variants={{
+          hover: { y: -3, color: "#1a6b3f" },
+        }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+        className="relative text-[22px] font-medium tracking-tight text-black"
+      >
+        {step.day}
+      </motion.h3>
+
+      {/* Thin accent underline that draws in on hover */}
+      <div className="relative mx-auto mt-2 h-[2px] w-6 overflow-hidden rounded-full bg-black/10">
+        <motion.span
+          variants={{
+            hover: { scaleX: 1 },
+          }}
+          initial={{ scaleX: 0 }}
+          style={{ originX: 0 }}
+          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+          className="block h-full w-full bg-[#1a6b3f]"
+        />
+      </div>
+
+      <p className="relative mx-auto mt-4 max-w-[215px] whitespace-pre-line text-[15px] font-light leading-[1.85] text-black/70 transition-colors duration-300 group-hover:text-black/85">
+        {step.text}
+      </p>
+    </motion.div>
+  );
+}
+
+function AnimatedChevrons({ delay = 0 }) {
+  return (
+    <motion.div
+      variants={{
+        hidden: { opacity: 0 },
+        visible: {
+          opacity: 1,
+          transition: { duration: 0.6, delay },
+        },
+      }}
+      className="hidden md:flex"
+    >
+      <motion.svg
+        viewBox="0 0 42 44"
+        className="h-11 w-10 shrink-0 text-black/70"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+        animate={{ x: [0, 5, 0] }}
+        transition={{
+          duration: 2.2,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay,
+        }}
+      >
+        <path d="M5 4l14 18L5 40" />
+        <path d="M14 4l14 18-14 18" />
+        <path d="M23 4l14 18-14 18" />
+      </motion.svg>
+    </motion.div>
+  );
+}
+
+/* -------------------------------------------------------
    MAIN SECTION
 -------------------------------------------------------- */
 
@@ -381,7 +477,7 @@ export default function Process() {
               className={`${cardClass} flex items-center justify-between gap-4 px-6 py-7 sm:px-10`}
             >
               <h3 className="text-2xl tracking-tight">Built For Both</h3>
-              <LanguagePill />
+              <TypePill />
             </motion.div>
           </div>
 
@@ -412,7 +508,7 @@ export default function Process() {
         </div>
 
         {/* =====================================================
-            BOTTOM: 6 DAY PROCESS
+            BOTTOM: 6 DAY PROCESS — premium animated
         ====================================================== */}
 
         <motion.div
@@ -421,41 +517,81 @@ export default function Process() {
         >
           <div className="mx-auto max-w-[980px] space-y-10 md:space-y-14">
             {rows.map((row, rowIndex) => (
-              <div
+              <motion.div
                 key={rowIndex}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.25 }}
+                variants={{
+                  hidden: {},
+                  visible: {
+                    transition: {
+                      staggerChildren: 0.16,
+                      delayChildren: rowIndex * 0.1,
+                    },
+                  },
+                }}
                 className="grid gap-10 md:grid-cols-[1fr_auto_1fr_auto_1fr] md:items-center md:gap-6"
               >
                 {row.map((step, i) => (
                   <React.Fragment key={step.day}>
-                    <div className="text-center">
-                      <h3 className="text-[22px] font-medium tracking-tight">
-                        {step.day}
-                      </h3>
-
-                      <p className="mx-auto mt-3 max-w-[215px] whitespace-pre-line text-[15px] font-light leading-[1.85] text-black/80">
-                        {step.text}
-                      </p>
-                    </div>
-
-                    {i < row.length - 1 && <Chevrons />}
+                    <ProcessStep step={step} index={i} />
+                    {i < row.length - 1 && <AnimatedChevrons delay={i * 0.15} />}
                   </React.Fragment>
                 ))}
-              </div>
+              </motion.div>
             ))}
           </div>
 
           {/* Pills */}
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-2.5">
+          <motion.div
+            className="mt-12 flex flex-wrap items-center justify-center gap-2.5"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.4 }}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: { staggerChildren: 0.12, delayChildren: 0.1 },
+              },
+            }}
+          >
             {pills.map((pill) => (
-              <span
+              <motion.span
                 key={pill.label}
-                className="inline-flex items-center gap-2.5 rounded-full border border-black/[0.08] bg-white px-5 py-2.5 text-[15px] text-black"
+                variants={{
+                  hidden: { opacity: 0, y: 16, scale: 0.9 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    transition: {
+                      duration: 0.55,
+                      ease: [0.22, 1, 0.36, 1],
+                    },
+                  },
+                }}
+                whileHover={{
+                  scale: 1.06,
+                  y: -3,
+                  borderColor: "rgba(26,107,63,0.35)",
+                  boxShadow: "0 12px 30px rgba(19,90,54,0.16)",
+                  backgroundColor: "#f4faf6",
+                }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                className="inline-flex cursor-default items-center gap-2.5 rounded-full border border-black/[0.08] bg-white px-5 py-2.5 text-[15px] text-black"
               >
-                <PillIcon type={pill.icon} />
+                <motion.span
+                  className="flex items-center justify-center"
+                  whileHover={{ rotate: 12, scale: 1.15 }}
+                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <PillIcon type={pill.icon} />
+                </motion.span>
                 {pill.label}
-              </span>
+              </motion.span>
             ))}
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

@@ -1,27 +1,27 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const projects = [
   {
-    title: "Mattress Brand",
+    title: "Engenerring Companies",
     image:
       "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1400&q=85",
     link: "#",
   },
   {
-    title: "Interior Fitout",
+    title: "Electric Brands",
     image:
       "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=85",
     link: "#",
   },
   {
-    title: "Corporate Profile",
+    title: "Agriculture Businesses",
     image:
       "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1400&q=85",
     link: "#",
   },
   {
-    title: "Brand Presentation",
+    title: "Food Businesses",
     image:
       "https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=1400&q=85",
     link: "#",
@@ -34,7 +34,84 @@ const getLinkProps = (link) =>
     ? { target: "_blank", rel: "noopener noreferrer" }
     : {};
 
+/* =========================================================
+   CUSTOM CURSOR CIRCLE (follows mouse inside a card,
+   shown only while hovering that card)
+========================================================= */
+function CursorArrow({ position, visible }) {
+  return (
+    <motion.span
+      initial={false}
+      animate={{
+        opacity: visible ? 1 : 0,
+        scale: visible ? 1 : 0.5,
+      }}
+      transition={{
+        duration: 0.35,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      style={{
+        left: position.x,
+        top: position.y,
+      }}
+      className="
+        pointer-events-none
+        absolute
+        z-20
+        flex
+        h-14
+        w-14
+        -translate-x-1/2
+        -translate-y-1/2
+        items-center
+        justify-center
+        rounded-full
+        bg-black
+        shadow-[0_12px_30px_rgba(0,0,0,0.3)]
+      "
+    >
+      {/* Inner ring for a premium two-layer finish */}
+      <span
+        className="
+          pointer-events-none
+          absolute
+          inset-[2px]
+          rounded-full
+          border
+          border-white/15
+        "
+      />
+
+      {/* Right-pointing arrow icon */}
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        className="relative h-[19px] w-[19px] text-white"
+      >
+        <path
+          d="M5 12H19M19 12L13 6M19 12L13 18"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </motion.span>
+  );
+}
+
 export default function ServicesPremium() {
+  const [activeIndex, setActiveIndex] = useState(null);
+  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setCursorPos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
   return (
     <section
       id="work"
@@ -115,16 +192,19 @@ export default function ServicesPremium() {
               className="group"
             >
               {/* =================================================
-                  IMAGE CARD (CLICKABLE)
+                  IMAGE CARD (CLICKABLE, CUSTOM CURSOR)
               ================================================== */}
-
+              
               <a
                 href={project.link}
                 aria-label={`Open ${project.title}`}
                 {...getLinkProps(project.link)}
+                onMouseEnter={() => setActiveIndex(index)}
+                onMouseLeave={() => setActiveIndex(null)}
+                onMouseMove={handleMouseMove}
                 className="
                   block
-                  cursor-pointer
+                  cursor-none
                   rounded-[1.5rem]
                   outline-none
                   focus-visible:ring-2
@@ -191,6 +271,19 @@ export default function ServicesPremium() {
                     "
                   />
 
+                  {/* Darken overlay on hover so the cursor circle pops */}
+                  <div
+                    className="
+                      pointer-events-none
+                      absolute
+                      inset-0
+                      bg-black/0
+                      transition-colors
+                      duration-500
+                      group-hover:bg-black/[0.06]
+                    "
+                  />
+
                   {/* Premium border highlight */}
                   <div
                     className="
@@ -223,6 +316,15 @@ export default function ServicesPremium() {
                       duration-700
                       group-hover:opacity-100
                     "
+                  />
+
+                  {/* =================================================
+                      CUSTOM CURSOR — follows mouse, only this card
+                  ================================================== */}
+
+                  <CursorArrow
+                    position={cursorPos}
+                    visible={activeIndex === index}
                   />
                 </motion.div>
               </a>
