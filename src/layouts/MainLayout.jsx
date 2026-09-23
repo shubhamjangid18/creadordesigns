@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 import Navbar from "../components/common/Navbar";
 import Footer from "../components/common/Footer";
@@ -7,9 +7,12 @@ import Home from "../pages/Home";
 import Gallery from "../pages/Gallery";
 
 export default function MainLayout() {
+  const location = useLocation();
+  const isGallery = location.pathname === "/gallery";
+
   return (
     <div className="min-h-screen">
-      <Navbar />
+      {!isGallery && <Navbar />}
 
       <main>
         <Routes>
@@ -18,7 +21,7 @@ export default function MainLayout() {
         </Routes>
       </main>
 
-      <Footer />
+      {!isGallery && <Footer />}
     </div>
   );
 }
