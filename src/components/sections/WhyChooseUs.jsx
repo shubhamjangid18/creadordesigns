@@ -3,10 +3,10 @@ import { motion } from "framer-motion";
 
 export default function WhatWeDeliver() {
   const deliverables = [
-    "Growing business profile",
-    "Pixel-Perfect Website Design & Full-Stack Development",
-    "Responsive Web Templates & UI/UX Components",
-    "Enterprise-Grade Web Applications & Solutions",
+    "Company Profiles",
+    "Products portfolio Profiles",
+    "Sales & Proposal Profiles",
+    "Investor & Pitch Profiles",
   ];
 
   const features = [

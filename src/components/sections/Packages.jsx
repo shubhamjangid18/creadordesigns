@@ -29,7 +29,7 @@ const packages = [
       "Advanced Positioning & Corporate Messaging",
       "Premium Layout & Infographics",
       "3–4 Revisions",
-      "Print-Ready PDF",
+      "Print-Ready CDR/PDF",
       "Source Files Included",
       "Timeline: 5–10 Days (Approx)",
     ],
