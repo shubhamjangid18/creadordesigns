@@ -5,12 +5,12 @@ const BRAND_NAME = "CreadorDesigns";
 const BRAND_TAGLINE = "Creativity is in our DNA";
 
 const INSTAGRAM_URL = "https://www.instagram.com/creadordesigns/"; 
-const WHATSAPP_URL = "https://wa.me/919325026968"; // e.g. https://wa.me/91XXXXXXXXXX
+const WHATSAPP_URL = "https://wa.me/919325026968"; 
 
 
 const INVERT_LOGO = false;
 
-// Left panel me dikhne wale stats — apne actual numbers se replace kar do
+
 const STATS = [
   { value: "198+", label: "Projects\nDelivered" },
   { value: "93%", label: "Results\nRetained" },

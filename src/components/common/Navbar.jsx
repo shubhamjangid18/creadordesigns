@@ -3,12 +3,11 @@ import useScroll from "../../hooks/useScroll";
 import logo from "../../assets/images/CDlogo.png";
 
 const BRAND_NAME = "Creador Designs";
-const BRAND_TAGLINE = "Creativity is in our DNA";
+const BRAND_TAGLINE = "CREATIVITY IS IN OUR DNA";
 
 export default function Navbar() {
   const scrolled = useScroll();
 
-  // Click par hero section pe scroll karo
   const handleBrandClick = (e) => {
     e.preventDefault();
 

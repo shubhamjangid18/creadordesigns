@@ -6,33 +6,32 @@ const projects = [
     title: "Engenerring Companies",
     image:
       "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1400&q=85",
-    link: "#",
   },
   {
     title: "Electric Brands",
     image:
       "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=85",
-    link: "#",
   },
   {
     title: "Agriculture Businesses",
     image:
       "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1400&q=85",
-    link: "#",
   },
   {
     title: "Food Businesses",
     image:
       "https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=1400&q=85",
-    link: "#",
   },
 ];
 
-// External link (http...) ho to naye tab me khule, warna same tab me
-const getLinkProps = (link) =>
-  /^https?:\/\//.test(link)
-    ? { target: "_blank", rel: "noopener noreferrer" }
-    : {};
+// Sab kahin bhi gallery redirect ho to yahi path use hoga
+const GALLERY_PATH = "/gallery";
+
+// Naya tab me kholne ke liye common props
+const newTabProps = {
+  target: "_blank",
+  rel: "noopener noreferrer",
+};
 
 /* =========================================================
    CUSTOM CURSOR CIRCLE (follows mouse inside a card,
@@ -192,13 +191,13 @@ export default function ServicesPremium() {
               className="group"
             >
               {/* =================================================
-                  IMAGE CARD (CLICKABLE, CUSTOM CURSOR)
+                  IMAGE CARD (CLICKABLE → GALLERY, NEW TAB, CUSTOM CURSOR)
               ================================================== */}
               
               <a
-                href={project.link}
-                aria-label={`Open ${project.title}`}
-                {...getLinkProps(project.link)}
+                href={GALLERY_PATH}
+                {...newTabProps}
+                aria-label={`Open ${project.title} in gallery`}
                 onMouseEnter={() => setActiveIndex(index)}
                 onMouseLeave={() => setActiveIndex(null)}
                 onMouseMove={handleMouseMove}
@@ -363,10 +362,10 @@ export default function ServicesPremium() {
                   {project.title}
                 </motion.h3>
 
-                {/* Visit button */}
+                {/* Visit button → Gallery, new tab */}
                 <motion.a
-                  href={project.link}
-                  {...getLinkProps(project.link)}
+                  href={GALLERY_PATH}
+                  {...newTabProps}
                   whileHover={{
                     scale: 1.04,
                     y: -1,
@@ -425,6 +424,104 @@ export default function ServicesPremium() {
             </motion.article>
           ))}
         </div>
+
+        {/* =====================================================
+            VIEW GALLERY BUTTON (NEW TAB)
+        ====================================================== */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{
+            duration: 0.7,
+            delay: 0.15,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          className="
+            mt-14
+            flex
+            justify-center
+            sm:mt-16
+            lg:mt-20
+          "
+        >
+          <motion.a
+            href={GALLERY_PATH}
+            {...newTabProps}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.97 }}
+            className="
+              group/gallery
+              relative
+              inline-flex
+              items-center
+              gap-3
+              overflow-hidden
+              rounded-full
+              bg-black
+              px-7
+              py-3.5
+              text-[13px]
+              font-medium
+              tracking-wide
+              text-white
+              shadow-[0_8px_25px_rgba(0,0,0,0.15)]
+              transition-all
+              duration-400
+              hover:shadow-[0_14px_38px_rgba(0,0,0,0.25)]
+              sm:px-8
+              sm:py-4
+              sm:text-sm
+            "
+          >
+            <span className="relative z-10">View Full Gallery</span>
+
+            <span
+              className="
+                relative z-10
+                flex
+                h-6
+                w-6
+                items-center
+                justify-center
+                rounded-full
+                bg-white
+                text-black
+                transition-transform
+                duration-400
+                group-hover/gallery:translate-x-1
+              "
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                className="h-3.5 w-3.5"
+              >
+                <path
+                  d="M5 12H19M19 12L13 6M19 12L13 18"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+
+            {/* Subtle fill sweep on hover */}
+            <span
+              className="
+                pointer-events-none
+                absolute
+                inset-0
+                -translate-x-full
+                bg-white/10
+                transition-transform
+                duration-500
+                group-hover/gallery:translate-x-0
+              "
+            />
+          </motion.a>
+        </motion.div>
       </div>
     </section>
   );
